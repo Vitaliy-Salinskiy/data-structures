@@ -6,7 +6,7 @@ public class LowArrayApp {
         int nElems = 0;
         int j;
 
-        arr.setElem(0, 77); // insert 10 items
+        arr.setElem(0, 77);
         arr.setElem(1, 99);
         arr.setElem(2, 44);
         arr.setElem(3, 55);
