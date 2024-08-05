@@ -38,17 +38,27 @@ public class OrderedArray {
     }
 
     public void insert(long value) {
-        int j;
-        for (j = 0; j < nElems; j++) {
-            if (a[j] > value) {
-                break;
+        int lowerBound = 0;
+        int upperBound = nElems - 1;
+        int curIn;
+
+        while (lowerBound <= upperBound) {
+            curIn = (lowerBound + upperBound) / 2;
+
+            if (a[curIn] < value) {
+                lowerBound = curIn + 1;
+            } else {
+                upperBound = curIn - 1;
             }
         }
 
-        for (int k = nElems; k > j; k--) {
+        curIn = lowerBound;
+
+        for (int k = nElems; k > curIn; k--) {
             a[k] = a[k - 1];
         }
-        a[j] = value;
+
+        a[curIn] = value;
         nElems++;
     }
 
@@ -63,6 +73,32 @@ public class OrderedArray {
             nElems--;
             return true;
         }
+    }
+
+    public static OrderedArray merge(OrderedArray arr1, OrderedArray arr2) {
+        OrderedArray mergedArr = new OrderedArray(arr1.size() + arr2.size());
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < arr1.size() && j < arr2.size()) {
+            if (arr1.a[i] < arr2.a[j]) {
+                mergedArr.a[k++] = arr1.a[i++];
+            } else {
+                mergedArr.a[k++] = arr2.a[j++];
+            }
+        }
+
+        while (i < arr1.size()) {
+            mergedArr.a[k++] = arr1.a[i++];
+        }
+
+        while (j < arr2.size()) {
+            mergedArr.a[k++] = arr1.a[j++];
+        }
+
+        mergedArr.nElems = k;
+        return mergedArr;
     }
 
     public void display() {

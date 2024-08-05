@@ -31,5 +31,62 @@ public class HighArrayApp {
         arr.delete(99);
 
         arr.display();
+
+        System.out.println("Project 2.1 =============================");
+
+        long max = arr.getMax();
+        if (max == 1) {
+            System.out.println("Array is empty");
+        } else {
+            System.out.println("Max value: " + max);
+        }
+
+        System.out.println("Project 2.1 =============================");
+
+        arr.display();
+
+        System.out.println("Project 2.2 =============================");
+        long removedMax = arr.removeMax();
+        if (max == 1) {
+            System.out.println("Array is empty");
+        } else {
+            System.out.println("Max value to remove: " + removedMax);
+        }
+        System.out.println("Project 2.2 =============================");
+
+        arr.display();
+
+        System.out.println("Project 2.3 =============================");
+        HighArray inverseArray = new HighArray(100);
+        while (arr.size() > 0) {
+            long newValue = arr.removeMax();
+            inverseArray.insert(newValue);
+        }
+        inverseArray.display();
+        System.out.println("Project 2.3 =============================");
+
+        System.out.println("Project 2.6 =============================");
+        HighArray noDupsArr = new HighArray(100);
+        noDupsArr.insert(12);
+        noDupsArr.insert(12);
+        noDupsArr.insert(32);
+        noDupsArr.insert(32);
+        noDupsArr.insert(32);
+        noDupsArr.insert(44);
+        noDupsArr.insert(11);
+        noDupsArr.insert(54);
+        noDupsArr.insert(0);
+        noDupsArr.insert(66);
+        noDupsArr.insert(66);
+
+        noDupsArr.display();
+
+        noDupsArr.noDups();
+
+        noDupsArr.display();
+
+        System.out.println("Project 2.6 =============================");
+
+
     }
 }

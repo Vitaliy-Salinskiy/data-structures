@@ -16,6 +16,25 @@ public class OrderedArrayApp {
         arr.insert(66);
         arr.insert(33);
 
+        System.out.println("Project 2.5 =========================================");
+
+        OrderedArray arr1 = new OrderedArray(maxSize);
+
+        arr1.insert(12);
+        arr1.insert(23);
+        arr1.insert(34);
+        arr1.insert(45);
+        arr1.insert(56);
+        arr1.insert(67);
+        arr1.insert(78);
+        arr1.insert(89);
+
+        OrderedArray mergedArray = OrderedArray.merge(arr, arr1);
+        mergedArray.display();
+
+        System.out.println("Project 2.5 =========================================");
+
+
         int searchKey = 55;
         if (arr.find(searchKey) != arr.size()) {
             System.out.println("Found " + searchKey);

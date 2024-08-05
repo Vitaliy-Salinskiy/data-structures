@@ -46,10 +46,50 @@ public class HighArray {
         }
     }
 
+    public long getMax() {
+        if (nElems == 0) {
+            return 1;
+        } else {
+            long max = a[0];
+            for (int i = 0; i < nElems; i++) {
+                if (max < a[i]) {
+                    max = a[i];
+                }
+            }
+
+            return max;
+        }
+    }
+
+    public int size() {
+        return nElems;
+    }
+
+    public long removeMax() {
+        long maxItem = getMax();
+        delete(maxItem);
+        return maxItem;
+    }
+
+    public void noDups() {
+        for (int j = 0; j < nElems; j++) {
+            for (int i = j + 1; i < nElems; i++) {
+                if (a[j] == a[i]) {
+                    for (int k = j; k < nElems - 1; k++) {
+                        a[k] = a[k + 1];
+                    }
+                    nElems--;
+                    i--;
+                }
+            }
+        }
+    }
+
     public void display() {
         for (int j = 0; j < nElems; j++) {
             System.out.print(a[j] + " ");
         }
         System.out.println();
     }
+
 }
