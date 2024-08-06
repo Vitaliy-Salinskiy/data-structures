@@ -1,5 +1,7 @@
 package Arrays.StoringObjects;
 
+import models.Person;
+
 public class ClassDataArray {
     private Person[] arr;
     private int nElems;

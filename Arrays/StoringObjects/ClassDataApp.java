@@ -1,5 +1,7 @@
 package Arrays.StoringObjects;
 
+import models.Person;
+
 public class ClassDataApp {
     public static void main(String[] args) {
         int maxSize = 100;
@@ -33,7 +35,7 @@ public class ClassDataApp {
         arr.delete("Creswell");
 
         arr.displayArr();
-        
+
 
     }
 }

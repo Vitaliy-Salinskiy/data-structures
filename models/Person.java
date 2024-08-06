@@ -1,4 +1,4 @@
-package Arrays.StoringObjects;
+package models;
 
 public class Person {
     private String lastName;
