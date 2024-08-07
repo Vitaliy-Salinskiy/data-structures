@@ -24,18 +24,68 @@ public class ArrayIns {
 
     public void insertionSort() {
         int in, out;
+        int copiesCount = 0;
+        int comparisonsCount = 0;
+
+        for (out = 1; out < nElems; out++) {
+            long temp = a[out];
+            copiesCount++;
+            in = out;
+
+            while (in > 0 && a[in - 1] >= temp) {
+                comparisonsCount++;
+                if (a[in - 1] > temp) {
+                    a[in] = a[in - 1];
+                    copiesCount++;
+                    --in;
+                } else {
+                    break;
+                }
+            }
+            a[in] = temp;
+            copiesCount++;
+        }
+        System.out.println("Comparisons: " + comparisonsCount + " copies: " + copiesCount);
+    }
+
+    public void insertionSortNoDup() {
+        int in, out;
+        int minValue = -1;
 
         for (out = 1; out < nElems; out++) {
             long temp = a[out];
             in = out;
 
-            while (in > 0 && a[in - 1] >= temp) {
-                a[in] = a[in - 1];
-                --in;
+            boolean isDuplicate = false;
+            for (int i = 0; i < out; i++) {
+                if (a[i] == temp) {
+                    isDuplicate = true;
+                    a[out] = minValue;
+                    break;
+                }
             }
-            a[in] = temp;
+
+            if (!isDuplicate) {
+                while (in > 0 && a[in - 1] >= temp) {
+                    a[in] = a[in - 1];
+                    --in;
+                }
+                a[in] = temp;
+            }
         }
+
+        int uniqueCount = 0;
+
+        for (int i = 0; i < nElems; i++) {
+            if (a[i] != minValue) {
+                a[uniqueCount] = a[i];
+                uniqueCount++;
+            }
+        }
+
+        nElems = uniqueCount;
     }
+
 
     //    Project 3.2
     public double median() {

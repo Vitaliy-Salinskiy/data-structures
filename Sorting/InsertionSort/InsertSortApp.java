@@ -26,8 +26,10 @@ public class InsertSortApp {
 
 //        arr.insertionSort();
 
-        arr.noDups();
+//        arr.noDups();
 
+        arr.insertionSortNoDup();
+        
 //        double result = arr.median();
 //        System.out.println("Median: " + result);
 
