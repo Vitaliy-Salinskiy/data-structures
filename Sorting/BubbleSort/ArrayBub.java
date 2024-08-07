@@ -33,6 +33,41 @@ public class ArrayBub {
         }
     }
 
+
+    // Project 3.1
+    public void bubbleSortBidirect() {
+        int start = 0;
+        int end = nElems - 1;
+        boolean swapped = true;
+
+        while (swapped) {
+            swapped = false;
+
+            for (int i = start; i < end; i++) {
+                if (a[i] > a[i + 1]) {
+                    swap(i, i + 1);
+                    swapped = true;
+                }
+            }
+
+            end--;
+
+            if (!swapped) break;
+
+            swapped = false;
+
+            for (int i = end; i > start; i--) {
+                if (a[i] < a[i - 1]) {
+                    swap(i, i - 1);
+                    swapped = true;
+                }
+            }
+
+            start++;
+        }
+    }
+    // /Project 3.1
+
     public void swap(int one, int two) {
         long temp = a[one];
         a[one] = a[two];

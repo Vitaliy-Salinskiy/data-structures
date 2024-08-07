@@ -36,5 +36,38 @@ public class ArrayIns {
             a[in] = temp;
         }
     }
-    
+
+    //    Project 3.2
+    public double median() {
+        insertionSort();
+
+        if (nElems % 2 == 1) {
+            return a[nElems / 2];
+        } else {
+            int middle1 = nElems / 2;
+            int middle2 = middle1 - 1;
+            return (a[middle1] + a[middle2]) / 2.0;
+        }
+    }
+    //    Project 3.2
+
+    //    Project 3.3
+    public void noDups() {
+        insertionSort();
+
+        int readIndex = 0;
+        int writeIndex = 0;
+
+        while (readIndex < nElems) {
+            a[writeIndex++] = a[readIndex++];
+
+            while (readIndex < nElems && a[readIndex] == a[readIndex - 1]) {
+                readIndex++;
+            }
+        }
+
+        nElems = writeIndex;
+    }
+    //    Project 3.3
+
 }

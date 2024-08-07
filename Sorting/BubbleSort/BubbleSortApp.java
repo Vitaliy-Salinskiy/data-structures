@@ -18,7 +18,11 @@ public class BubbleSortApp {
 
         arr.display();
 
-        arr.bubbleSort();
+        // Project 3.1
+        arr.bubbleSortBidirect();
+        // Project 3.1
+
+        //        arr.bubbleSort();
 
         arr.display();
     }
