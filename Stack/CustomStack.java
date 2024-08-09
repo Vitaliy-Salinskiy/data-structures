@@ -23,11 +23,28 @@ public class CustomStack<T> {
         return stackArray[top];
     }
 
+    public T peekN(int n) {
+        return stackArray[n];
+    }
+
     public boolean isEmpty() {
         return top == -1;
     }
 
     public boolean isFull() {
         return top == maxSize - 1;
+    }
+
+    public int size() {
+        return top + 1;
+    }
+
+    public void displayStack(String s) {
+        System.out.print(s);
+        System.out.print("Stack bottom --> top: ");
+        for (int i = 0; i < size(); i++) {
+            System.out.print(peekN(i) + " ");
+        }
+        System.out.println();
     }
 }
