@@ -9,6 +9,7 @@ public class QueueApp {
         queue.insert(30L);
         queue.insert(40L);
 
+
         queue.remove();
         queue.remove();
         queue.remove();
@@ -17,6 +18,8 @@ public class QueueApp {
         queue.insert(60L);
         queue.insert(70L);
         queue.insert(80L);
+
+        queue.displayQueue();
 
         while (!queue.isEmpty()) {
             long n = queue.remove();

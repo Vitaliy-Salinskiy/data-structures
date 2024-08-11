@@ -48,4 +48,17 @@ public class CustomQueue<T> {
         return nItems;
     }
 
+    public void displayQueue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty");
+        } else {
+            System.out.print("Queue contents: ");
+            for (int i = 0; i < nItems; i++) {
+                int index = (front + i) % maxSize;
+                System.out.print(queArray[index] + " ");
+            }
+        }
+        System.out.println();
+    }
+
 }
