@@ -4,7 +4,7 @@ public class DoublyLinkedList {
     private Link first;
     private Link last;
 
-    private boolean isEmpty() {
+    public boolean isEmpty() {
         return first == null;
     }
 
@@ -84,7 +84,7 @@ public class DoublyLinkedList {
                 return null;
             }
         }
-        
+
         if (current == first) {
             first = current.getNext();
         } else {
@@ -117,6 +117,14 @@ public class DoublyLinkedList {
             current = current.getPrevious();
         }
         System.out.println();
+    }
+
+    public Link getFirst() {
+        return first;
+    }
+
+    public Link getLast() {
+        return last;
     }
 
     public static void main(String[] args) {
