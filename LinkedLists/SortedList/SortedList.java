@@ -47,6 +47,10 @@ public class SortedList {
         System.out.println();
     }
 
+    public SimplifiedLink getFirst() {
+        return first;
+    }
+
     public static void main(String[] args) {
         SortedList sortedList = new SortedList();
 
