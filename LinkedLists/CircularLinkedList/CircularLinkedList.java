@@ -1,4 +1,4 @@
-package LinkedLists;
+package LinkedLists.CircularLinkedList;
 
 import LinkedLists.Iterator.Link;
 
