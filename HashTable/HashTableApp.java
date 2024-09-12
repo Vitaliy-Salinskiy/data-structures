@@ -7,8 +7,7 @@ import java.io.InputStreamReader;
 public class HashTableApp {
     public static void main(String[] args) throws IOException {
         DataItem aDataItem;
-        int aKey, size, n, keysPerCell;
-        keysPerCell = 10;
+        int aKey, size, n;
 
         System.out.print("Enter size of hash table: ");
         size = getInt();
@@ -17,7 +16,7 @@ public class HashTableApp {
 
         HashTable theHashTable = new HashTable(size);
         for (int j = 0; j < n; j++) {
-            aKey = (int) (Math.random() * keysPerCell * size);
+            aKey = (int) (Math.random() * 2 * size);
             aDataItem = new DataItem(aKey);
             theHashTable.insert(aDataItem);
         }
