@@ -87,6 +87,21 @@ public class Heap {
         return true;
     }
 
+    public void insertAt(int index, Node newNode) {
+        heapArray[index] = newNode;
+    }
+
+    public void incrementSize() {
+        currentSize++;
+    }
+
+    public void displayArray() {
+        for (int j = 0; j < maxSize; j++) {
+            System.out.print(heapArray[j].getKey() + " ");
+        }
+        System.out.println();
+    }
+
     public void displayHeap() {
         System.out.print("HeapArray: ");
         for (int i = 0; i < currentSize; i++) {
