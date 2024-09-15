@@ -11,6 +11,7 @@ public class Graph {
     private int nVerts;
     private Stack<Integer> stack;
     private Queue<Integer> queue;
+    private char[] sortedArray;
 
     public Graph() {
         vertexList = new Vertex[MAX_VERTS];
@@ -23,12 +24,21 @@ public class Graph {
             }
         }
 
+        sortedArray = new char[MAX_VERTS];
         stack = new Stack<>();
         queue = new LinkedList<>();
     }
 
     public void addVertex(char lab) {
         vertexList[nVerts++] = new Vertex(lab);
+    }
+
+    public void displayVertex(int v) {
+        System.out.print(vertexList[v].label);
+    }
+
+    public void addDirectedEdge(int start, int end) {
+        adjMat[start][end] = 1;
     }
 
     public void addEdge(int start, int end) {
@@ -43,6 +53,12 @@ public class Graph {
             }
         }
         return -1;
+    }
+
+    private void resetMatrix() {
+        for (int i = 0; i < nVerts; i++) {
+            vertexList[i].wasVisited = false;
+        }
     }
 
     public void dfs() {
@@ -106,13 +122,74 @@ public class Graph {
         resetMatrix();
     }
 
-    public void displayVertex(int v) {
-        System.out.print(vertexList[v].label);
+    public void topoSort() {
+        int orig_nVerts = nVerts;
+
+        while (nVerts > 0) {
+            int currentVertex = noSuccessors();
+            if (currentVertex == -1) {
+                System.out.println("Error: Graph has cycles");
+                return;
+            }
+
+            sortedArray[nVerts - 1] = vertexList[currentVertex].label;
+            deleteVertex(currentVertex);
+        }
+
+        System.out.print("Topologically sorted order: ");
+        for (int i = 0; i < orig_nVerts; i++) {
+            System.out.print(sortedArray[i]);
+        }
+        System.out.println();
     }
 
-    private void resetMatrix() {
-        for (int i = 0; i < nVerts; i++) {
-            vertexList[i].wasVisited = false;
+    public int noSuccessors() {
+        boolean isEdge;
+
+        for (int row = 0; row < nVerts; row++) {
+            isEdge = false;
+
+            for (int col = 0; col < nVerts; col++) {
+                if (adjMat[row][col] > 0) {
+                    isEdge = true;
+                    break;
+                }
+            }
+
+            if (!isEdge) {
+                return row;
+            }
+        }
+
+        return -1;
+    }
+
+    public void deleteVertex(int delVer) {
+        if (delVer != nVerts - 1) {
+            for (int i = delVer; i < nVerts; i++) {
+                vertexList[i] = vertexList[i + 1];
+            }
+
+            for (int row = delVer; row < nVerts - 1; row++) {
+                moveRowUp(row, nVerts);
+            }
+
+            for (int col = 0; col < nVerts - 1; col++) {
+                moveColLeft(col, nVerts - 1);
+            }
+        }
+        nVerts--;
+    }
+
+    private void moveRowUp(int row, int length) {
+        for (int col = 0; col < length; col++) {
+            adjMat[row][col] = adjMat[row + 1][col];
+        }
+    }
+
+    private void moveColLeft(int col, int length) {
+        for (int row = 0; row < length; row++) {
+            adjMat[row][col] = adjMat[row][col + 1];
         }
     }
 
@@ -144,5 +221,28 @@ public class Graph {
         System.out.println();
         System.out.print("MST: ");
         theGraph.mts();
+        System.out.println();
+
+        Graph directedGraph = new Graph();
+
+        directedGraph.addVertex('A');
+        directedGraph.addVertex('B');
+        directedGraph.addVertex('C');
+        directedGraph.addVertex('D');
+        directedGraph.addVertex('E');
+        directedGraph.addVertex('F');
+        directedGraph.addVertex('G');
+        directedGraph.addVertex('H');
+
+        directedGraph.addDirectedEdge(0, 3); // AD
+        directedGraph.addDirectedEdge(0, 4); // AE
+        directedGraph.addDirectedEdge(1, 4); // BE
+        directedGraph.addDirectedEdge(2, 5); // CF
+        directedGraph.addDirectedEdge(3, 6); // DG
+        directedGraph.addDirectedEdge(4, 6); // EG
+        directedGraph.addDirectedEdge(5, 7); // FH
+        directedGraph.addDirectedEdge(6, 7); // GH
+
+        directedGraph.topoSort();
     }
 }
