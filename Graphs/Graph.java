@@ -12,7 +12,6 @@ public class Graph {
     private Stack<Integer> stack;
     private Queue<Integer> queue;
 
-
     public Graph() {
         vertexList = new Vertex[MAX_VERTS];
         adjMat = new int[MAX_VERTS][MAX_VERTS];
@@ -62,9 +61,7 @@ public class Graph {
             }
         }
 
-        for (int i = 0; i < nVerts; i++) {
-            vertexList[i].wasVisited = false;
-        }
+        resetMatrix();
     }
 
     public void bfs() {
@@ -83,13 +80,40 @@ public class Graph {
             }
         }
 
-        for (int i = 0; i < nVerts; i++) {
-            vertexList[i].wasVisited = false;
+        resetMatrix();
+    }
+
+    public void mts() {
+        vertexList[0].wasVisited = true;
+        stack.push(0);
+
+        while (!stack.isEmpty()) {
+            int currentVertex = stack.peek();
+            int v = getAdjUnvisitedVertex(currentVertex);
+
+            if (v == -1) {
+                stack.pop();
+            } else {
+                vertexList[v].wasVisited = true;
+                stack.push(v);
+
+                displayVertex(currentVertex);
+                displayVertex(v);
+                System.out.print(" ");
+            }
         }
+
+        resetMatrix();
     }
 
     public void displayVertex(int v) {
         System.out.print(vertexList[v].label);
+    }
+
+    private void resetMatrix() {
+        for (int i = 0; i < nVerts; i++) {
+            vertexList[i].wasVisited = false;
+        }
     }
 
     public static void main(String[] args) {
@@ -101,15 +125,24 @@ public class Graph {
         theGraph.addVertex('D');
         theGraph.addVertex('E');
 
-        theGraph.addEdge(0, 1);
-        theGraph.addEdge(1, 2);
-        theGraph.addEdge(0, 3);
-        theGraph.addEdge(3, 4);
+        theGraph.addEdge(0, 1); // AB
+        theGraph.addEdge(0, 2); // AC
+        theGraph.addEdge(0, 3); // AD
+        theGraph.addEdge(0, 4); // AE
+        theGraph.addEdge(1, 2); // BC
+        theGraph.addEdge(1, 3); // BD
+        theGraph.addEdge(1, 4); // BE
+        theGraph.addEdge(2, 3); // CD
+        theGraph.addEdge(2, 4); // CE
+        theGraph.addEdge(3, 4); // DE
 
         System.out.print("Visits DFS: ");
         theGraph.dfs();
         System.out.println();
         System.out.print("Visits BFS: ");
         theGraph.bfs();
+        System.out.println();
+        System.out.print("MST: ");
+        theGraph.mts();
     }
 }
