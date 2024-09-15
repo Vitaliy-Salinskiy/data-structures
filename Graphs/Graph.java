@@ -99,7 +99,7 @@ public class Graph {
         resetMatrix();
     }
 
-    public void mts() {
+    public void mst() {
         vertexList[0].wasVisited = true;
         stack.push(0);
 
@@ -220,7 +220,7 @@ public class Graph {
         theGraph.bfs();
         System.out.println();
         System.out.print("MST: ");
-        theGraph.mts();
+        theGraph.mst();
         System.out.println();
 
         Graph directedGraph = new Graph();
