@@ -1,5 +1,7 @@
 package Graphs;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 
 public class Graph {
@@ -8,6 +10,7 @@ public class Graph {
     private int[][] adjMat;
     private int nVerts;
     private Stack<Integer> stack;
+    private Queue<Integer> queue;
 
 
     public Graph() {
@@ -20,7 +23,9 @@ public class Graph {
                 adjMat[i][j] = 0;
             }
         }
+
         stack = new Stack<>();
+        queue = new LinkedList<>();
     }
 
     public void addVertex(char lab) {
@@ -62,6 +67,27 @@ public class Graph {
         }
     }
 
+    public void bfs() {
+        vertexList[0].wasVisited = true;
+        displayVertex(0);
+        queue.add(0);
+        int v2;
+
+        while (!queue.isEmpty()) {
+            int v1 = queue.remove();
+
+            while ((v2 = getAdjUnvisitedVertex(v1)) != -1) {
+                vertexList[v2].wasVisited = true;
+                displayVertex(v2);
+                queue.add(v2);
+            }
+        }
+
+        for (int i = 0; i < nVerts; i++) {
+            vertexList[i].wasVisited = false;
+        }
+    }
+
     public void displayVertex(int v) {
         System.out.print(vertexList[v].label);
     }
@@ -80,8 +106,10 @@ public class Graph {
         theGraph.addEdge(0, 3);
         theGraph.addEdge(3, 4);
 
-        System.out.print("Visits: ");
+        System.out.print("Visits DFS: ");
         theGraph.dfs();
         System.out.println();
+        System.out.print("Visits BFS: ");
+        theGraph.bfs();
     }
 }
